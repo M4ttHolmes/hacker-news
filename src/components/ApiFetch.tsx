@@ -1,12 +1,14 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import Navigation from "./Navigation";
 import Results from "./Results";
 
 
 const ApiFetch = () => {
+    // STATE VARIABLES
     const [story, setStory] = useState<Story>([])
     const [fetchType, setFetchType] = useState<string>("topstories")
 
+    // TYPE DEFINITIONS    
     type Story = StoryDetails[]
 
     type StoryDetails = {
@@ -20,15 +22,14 @@ const ApiFetch = () => {
         url: string
     }
 
-
+    // Function for switching between fetch types (top, new, ask, show, job, etc.)
     const updateFetchType = (fetch: string) => {
         console.log("Update Fetch Called");
         setFetchType(fetch);
         console.log(fetch);
-        fetchNewStories();
     };
 
-
+    // Primary Fetch Function. Will build a new array of full article objects based on whatever is returned from the fetch.
     const fetchNewStories = () => {
         fetch(`https://hacker-news.firebaseio.com/v0/${fetchType}.json?print=pretty`)
             .then(res => res.json())
@@ -43,18 +44,15 @@ const ApiFetch = () => {
             
                 Promise.all(promises)
                 .then(json => {
-                    console.log(json);
                     setStory(json);
-
-                });
-                
-                
+                });   
             });
     }
 
+    // Hook that will fire immediately on page load, as well as when the fetchType state is updated (when switched between using the updateFetchType function)
     useEffect(() => {
         fetchNewStories();
-    }, [])
+    }, [fetchType])
 
     return(
         <div>
