@@ -4,7 +4,7 @@ import BrandLogo from "../assets/y18.gif"
 
 // Props passed in from ApiFetch component
 type FetchProps = {
-    updateFetchType: (fetch: string) => any
+    updateFetchType: (fetch: string) => void;
 }
 
 const Navigation = (props: FetchProps) => {
@@ -28,9 +28,9 @@ const Navigation = (props: FetchProps) => {
                 </Nav>
             </Navbar>
         </div>
-    )
-}
+    );
+};
 
 
 
-export default Navigation
+export default Navigation;

@@ -93,3 +93,8 @@ a {
 .card-subtitle {
   margin-bottom: 0px !important;
 }
+
+#btn-load {
+  display: block;
+  margin: 40px auto;
+}

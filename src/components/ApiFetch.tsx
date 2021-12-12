@@ -1,12 +1,20 @@
 import {useEffect, useState} from "react";
 import Navigation from "./Navigation";
 import Results from "./Results";
+import { Button } from "reactstrap";
 
 
 const ApiFetch = () => {
     // STATE VARIABLES
     const [story, setStory] = useState<Story>([])
     const [fetchType, setFetchType] = useState<string>("topstories")
+    const [countIncrement, setCountIncrement] = useState<number>(30)
+    const [count, setCount] = useState<number>(countIncrement)
+
+    // Function to update the current number of articles displayed
+    const updateCount = () => {
+        setCount(count + countIncrement)
+    }
 
     // TYPE DEFINITIONS    
     type Story = StoryDetails[]
@@ -26,6 +34,7 @@ const ApiFetch = () => {
     const updateFetchType = (fetch: string) => {
         console.log("Update Fetch Called");
         setFetchType(fetch);
+        setCount(countIncrement);
         console.log(fetch);
     };
 
@@ -34,7 +43,7 @@ const ApiFetch = () => {
         fetch(`https://hacker-news.firebaseio.com/v0/${fetchType}.json?print=pretty`)
             .then(res => res.json())
             .then(data => {
-                let promises = data.map((item: StoryDetails, key: number) => {
+                let promises = data.slice(0, count).map((item: StoryDetails, key: number) => {
                     return fetch(`https://hacker-news.firebaseio.com/v0/item/${item}.json?print=pretty`)
                     .then(
                         result => result.json(), 
@@ -52,12 +61,13 @@ const ApiFetch = () => {
     // Hook that will fire immediately on page load, as well as when the fetchType state is updated (when switched between using the updateFetchType function)
     useEffect(() => {
         fetchNewStories();
-    }, [fetchType])
+    }, [count, fetchType])
 
     return(
         <div>
             <Navigation updateFetchType={updateFetchType}/>
-            <Results story={story}/>
+            <Results updateCount={updateCount} story={story}/>
+            {/* <Button className="loadBtn" onClick={updateCount}>Load More</Button> */}
         </div>
     )
 }

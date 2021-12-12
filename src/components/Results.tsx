@@ -1,8 +1,9 @@
 import React from "react";
-import {Card, CardTitle, CardBody, CardSubtitle} from 'reactstrap'
+import {Card, CardTitle, CardBody, CardSubtitle, Button} from 'reactstrap'
 
 type ResultProps = {
     story: StoryDetails[]
+    updateCount: () => void
 }
 
 type StoryDetails = {
@@ -37,6 +38,7 @@ const Results = (props: ResultProps) => {
                     </Card>     
                 )
             })}
+            <Button id="btn-load" onClick={props.updateCount}>Load More</Button>
         </div>
     )
 }
