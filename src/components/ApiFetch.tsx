@@ -1,11 +1,9 @@
 import {useEffect, useState} from "react";
 import Navigation from "./Navigation";
 import Results from "./Results";
-import { Button } from "reactstrap";
-
 
 const ApiFetch = () => {
-    // STATE VARIABLES
+    // State Variables
     const [story, setStory] = useState<Story>([])
     const [fetchType, setFetchType] = useState<string>("topstories")
     const [countIncrement, setCountIncrement] = useState<number>(30)
@@ -16,7 +14,7 @@ const ApiFetch = () => {
         setCount(count + countIncrement)
     }
 
-    // TYPE DEFINITIONS    
+    // Type Definitions
     type Story = StoryDetails[]
 
     type StoryDetails = {
@@ -38,7 +36,7 @@ const ApiFetch = () => {
         console.log(fetch);
     };
 
-    // Primary Fetch Function. Will build a new array of full article objects based on whatever is returned from the fetch.
+    // Primary Fetch Function. Will build a new array of full article objects based on whatever is returned from the fetch. Sliced into smaller sections to improve load times.
     const fetchNewStories = () => {
         fetch(`https://hacker-news.firebaseio.com/v0/${fetchType}.json?print=pretty`)
             .then(res => res.json())
@@ -58,7 +56,7 @@ const ApiFetch = () => {
             });
     }
 
-    // Hook that will fire immediately on page load, as well as when the fetchType state is updated (when switched between using the updateFetchType function)
+    // Hook that will fire immediately on page load, as well as when the count or fetchType state is updated. 
     useEffect(() => {
         fetchNewStories();
     }, [count, fetchType])
@@ -67,7 +65,6 @@ const ApiFetch = () => {
         <div>
             <Navigation updateFetchType={updateFetchType}/>
             <Results updateCount={updateCount} story={story}/>
-            {/* <Button className="loadBtn" onClick={updateCount}>Load More</Button> */}
         </div>
     )
 }
