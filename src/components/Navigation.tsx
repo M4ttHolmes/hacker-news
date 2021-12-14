@@ -12,7 +12,7 @@ type FetchProps = {
 const Navigation = (props: FetchProps) => {
     const [navOpen, setNavOpen] = useState(false)
 
-
+    // Function for toggling navbar back to the collapsed state after a navlink has been selected
     const toggle = () => {
         setNavOpen(!navOpen)
     }
