@@ -1,11 +1,11 @@
 import './App.css';
 import ApiFetch from "./components/ApiFetch"
-import Navigation from './components/Navigation';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+
   return (
     <div className="App">
-      <Navigation />
       <ApiFetch />
     </div>
   );
