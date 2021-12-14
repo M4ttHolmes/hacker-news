@@ -53,6 +53,7 @@ const ApiFetch = () => {
     // Function for switching between fetch types (top, new, ask, show, job, etc.)
     const updateFetchType = (fetch: string) => {
         console.log("Update Fetch Called");
+        setSearchMode(false);
         setFetchType(fetch);
         setCount(countIncrement);
         console.log(fetch);
