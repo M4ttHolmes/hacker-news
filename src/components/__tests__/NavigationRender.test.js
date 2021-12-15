@@ -19,7 +19,7 @@ test("Test Navigation Render", () => {
   const showLink = screen.getByText(/Show/i);
   const jobsLink = screen.getByText(/Jobs/i);
   const searchInput = screen.getByRole("searchbox");
-  const searchButton = screen.getByRole("button")
+  const searchButton = screen.getByTestId("searchButton")
   expect(logo).toBeInTheDocument();
   expect(newestLink).toBeInTheDocument();
   expect(pastLink).toBeInTheDocument();
