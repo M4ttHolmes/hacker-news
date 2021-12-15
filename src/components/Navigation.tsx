@@ -34,7 +34,7 @@ const Navigation = (props: FetchProps) => {
                         <NavLink href="/">Submit</NavLink>
                         <form className="form-inline my-2 my-lg-0" onSubmit={(e) => {props.searchFetch(); e.preventDefault(); }}>
                             <input className="input-box mr-sm-2" type="search" placeholder="Search" aria-label="Search Field" required onChange={(e) => props.setSearch(e.target.value)}/>
-                            <button className="btn btn-outline my-2 my-sm-0" id="search-button" aria-label="Search Button" type="submit"><i className="fas fa-search"></i></button>
+                            <button data-testid="searchButton" className="btn btn-outline my-2 my-sm-0" id="search-button" aria-label="Search Button" type="submit"><i className="fas fa-search"></i></button>
                         </form>
                     </Nav>
                 </Collapse>
